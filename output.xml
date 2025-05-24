@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.10.12 on linux)" generated="2025-05-24T04:19:39.736580" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot-Test-Boilerplate" source="/home/khaled/courses/robot-test-boilerplate">
+<suite id="s1-s1" name="Tests" source="/home/khaled/courses/robot-test-boilerplate/tests">
+<suite id="s1-s1-s1" name="Api" source="/home/khaled/courses/robot-test-boilerplate/tests/api">
+<suite id="s1-s1-s1-s1" name="Sample Api Test" source="/home/khaled/courses/robot-test-boilerplate/tests/api/sample_api_test.robot">
+<test id="s1-s1-s1-s1-t1" name="Should Create And Delete Temp Session" line="6">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-05-24T04:19:40.128355" level="INFO">Creating Session using : alias=temp, url=https://jsonplaceholder.typicode.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>temp</arg>
+<arg>https://jsonplaceholder.typicode.com</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-05-24T04:19:40.128140" elapsed="0.000595"/>
+</kw>
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-05-24T04:19:40.129006" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-05-24T04:19:40.393890" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-05-24T04:19:40.394252" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 24 May 2025 01:19:40 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Server': 'cloudflare', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1746021932&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;s=LCVcES7k4wrtsCIlDAqxRzPgwJ3Agq2beOSDbO2JZF4%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1746021932&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;s=LCVcES7k4wrtsCIlDAqxRzPgwJ3Agq2beOSDbO2JZF4%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'X-Ratelimit-Limit': '1000', 'X-Ratelimit-Remaining': '999', 'X-Ratelimit-Reset': '1746021941', 'Vary': 'Origin, Accept-Encoding', 'Access-Control-Allow-Credentials': 'true', 'Cache-Control': 'max-age=43200', 'Pragma': 'no-cache', 'Expires': '-1', 'X-Content-Type-Options': 'nosniff', 'Etag': 'W/"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU"', 'Via': '1.1 vegur', 'Age': '6587', 'Cf-Cache-Status': 'HIT', 'Content-Encoding': 'gzip', 'CF-RAY': '9448f755381c70e7-MRS', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+} 
+ </msg>
+<msg time="2025-05-24T04:19:40.394501" level="INFO">/usr/lib/python3/dist-packages/urllib3/connectionpool.py:1100: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-05-24T04:19:40.394902" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>temp</arg>
+<arg>/posts/1</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-05-24T04:19:40.128969" elapsed="0.266025"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-05-24T04:19:40.398321" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-05-24T04:19:40.395709" elapsed="0.002982"/>
+</kw>
+<kw name="Delete Session By Name" owner="SessionManager">
+<arg>login</arg>
+<status status="PASS" start="2025-05-24T04:19:40.399566" elapsed="0.000624"/>
+</kw>
+<status status="PASS" start="2025-05-24T04:19:40.126984" elapsed="0.273818"/>
+</test>
+<status status="PASS" start="2025-05-24T04:19:39.769953" elapsed="0.632851"/>
+</suite>
+<status status="PASS" start="2025-05-24T04:19:39.768424" elapsed="0.637347"/>
+</suite>
+<status status="PASS" start="2025-05-24T04:19:39.766876" elapsed="0.642198"/>
+</suite>
+<status status="PASS" start="2025-05-24T04:19:39.739723" elapsed="0.672113"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Robot-Test-Boilerplate">Robot-Test-Boilerplate</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Tests">Robot-Test-Boilerplate.Tests</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="Api">Robot-Test-Boilerplate.Tests.Api</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1-s1" name="Sample Api Test">Robot-Test-Boilerplate.Tests.Api.Sample Api Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-05-24T04:19:39.693907" level="WARN">Error in file '/home/khaled/courses/robot-test-boilerplate/resources/keywords/ApiKeywords.robot' on line 39: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-05-24T04:19:40.129006" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>

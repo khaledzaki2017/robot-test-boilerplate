@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.3 on linux)" generated="2025-05-24T07:45:05.536208" rpa="false" schemaversion="5">
+<suite id="s1" name="List Users" source="/home/khaled/courses/robot-test-boilerplate/tests/api/users/list_users.robot">
+<test id="s1-t1" name="Super Admin Can Get User List" line="12">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:05.648211" level="INFO">${ROLE} = SUPER_ADMIN</msg>
+<var>${ROLE}</var>
+<arg>SUPER_ADMIN</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:05.647819" elapsed="0.000476"/>
+</kw>
+<kw name="Create Auth Session As Role" owner="ApiKeywords">
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:05.651576" level="INFO">${base_url} = https://your.api.endpoint.com</msg>
+<var>${base_url}</var>
+<arg>AUTH_API_BASE_URL</arg>
+<status status="PASS" start="2025-05-24T07:45:05.649321" elapsed="0.002295"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:05.651950" level="INFO">${login_path} = /auth/login</msg>
+<var>${login_path}</var>
+<arg>LOGIN_ENDPOINT</arg>
+<status status="PASS" start="2025-05-24T07:45:05.651755" elapsed="0.000218"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:05.652554" level="INFO">${username_key} = SUPER_ADMIN_USERNAME</msg>
+<var>${username_key}</var>
+<arg>${role.upper()}_USERNAME</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:05.652143" elapsed="0.000434"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:05.653020" level="INFO">${password_key} = SUPER_ADMIN_PASSWORD</msg>
+<var>${password_key}</var>
+<arg>${role.upper()}_PASSWORD</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:05.652665" elapsed="0.000378"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:05.653324" level="INFO">${username} = </msg>
+<var>${username}</var>
+<arg>${username_key}</arg>
+<status status="PASS" start="2025-05-24T07:45:05.653197" elapsed="0.000148"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:05.653546" level="INFO">${password} = </msg>
+<var>${password}</var>
+<arg>${password_key}</arg>
+<status status="PASS" start="2025-05-24T07:45:05.653420" elapsed="0.000146"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:05.653758" level="INFO">Creating Session using : alias=login, url=https://your.api.endpoint.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>login</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-05-24T07:45:05.653644" elapsed="0.000270"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-24T07:45:05.654429" level="INFO">${payload} = {'username': '', 'password': ''}</msg>
+<var>${payload}</var>
+<arg>username=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-24T07:45:05.654014" elapsed="0.000441"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-24T07:45:05.654710" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-24T07:45:05.654568" elapsed="0.000163"/>
+</kw>
+<kw name="Post Request" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:05.654837" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg time="2025-05-24T07:45:05.917954" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009244350&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.132050" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400928ba10&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.540214" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009289fa0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.548422" level="FAIL">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009289550&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</msg>
+<var>${response}</var>
+<arg>login</arg>
+<arg>${login_path}</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<status status="FAIL" start="2025-05-24T07:45:05.654815" elapsed="0.906372">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009289550&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:06.561435" elapsed="0.000028"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${token}</var>
+<arg>${response.json()['token']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:06.561597" elapsed="0.000036"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${auth_headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:06.561748" elapsed="0.000019"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>${role}</arg>
+<arg>${base_url}</arg>
+<arg>headers=${auth_headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:06.561914" elapsed="0.000017"/>
+</kw>
+<kw name="Delete Session By Name" owner="SessionManager">
+<arg>login</arg>
+<status status="NOT RUN" start="2025-05-24T07:45:06.562019" elapsed="0.000016"/>
+</kw>
+<arg>${ROLE}</arg>
+<status status="FAIL" start="2025-05-24T07:45:05.648796" elapsed="0.913421">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009289550&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</kw>
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:06.562454" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<var>${resp}</var>
+<arg>${ROLE}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:06.562427" elapsed="0.000162"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:06.562753" elapsed="0.000046"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-05-24T07:45:06.563541" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-05-24T07:45:06.563319" elapsed="0.000337"/>
+</kw>
+<status status="FAIL" start="2025-05-24T07:45:05.646365" elapsed="0.917382">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009289550&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</test>
+<test id="s1-t2" name="Manager Can Get User List" line="19">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:06.564680" level="INFO">${ROLE} = MANAGER</msg>
+<var>${ROLE}</var>
+<arg>MANAGER</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:06.564445" elapsed="0.000265"/>
+</kw>
+<kw name="Create Auth Session As Role" owner="ApiKeywords">
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:06.567234" level="INFO">${base_url} = https://your.api.endpoint.com</msg>
+<var>${base_url}</var>
+<arg>AUTH_API_BASE_URL</arg>
+<status status="PASS" start="2025-05-24T07:45:06.565312" elapsed="0.001951"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:06.567486" level="INFO">${login_path} = /auth/login</msg>
+<var>${login_path}</var>
+<arg>LOGIN_ENDPOINT</arg>
+<status status="PASS" start="2025-05-24T07:45:06.567366" elapsed="0.000142"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:06.568012" level="INFO">${username_key} = MANAGER_USERNAME</msg>
+<var>${username_key}</var>
+<arg>${role.upper()}_USERNAME</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:06.567599" elapsed="0.000438"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:06.568566" level="INFO">${password_key} = MANAGER_PASSWORD</msg>
+<var>${password_key}</var>
+<arg>${role.upper()}_PASSWORD</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:06.568195" elapsed="0.000395"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:06.568813" level="INFO">${username} = manager@example.com</msg>
+<var>${username}</var>
+<arg>${username_key}</arg>
+<status status="PASS" start="2025-05-24T07:45:06.568683" elapsed="0.000152"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:06.569040" level="INFO">${password} = managersecret</msg>
+<var>${password}</var>
+<arg>${password_key}</arg>
+<status status="PASS" start="2025-05-24T07:45:06.568915" elapsed="0.000146"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:06.569349" level="INFO">Creating Session using : alias=login, url=https://your.api.endpoint.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>login</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-05-24T07:45:06.569226" elapsed="0.000257"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-24T07:45:06.569812" level="INFO">${payload} = {'username': 'manager@example.com', 'password': 'managersecret'}</msg>
+<var>${payload}</var>
+<arg>username=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-24T07:45:06.569582" elapsed="0.000251"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-24T07:45:06.570048" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-24T07:45:06.569922" elapsed="0.000146"/>
+</kw>
+<kw name="Post Request" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:06.570253" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg time="2025-05-24T07:45:06.578674" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a28d0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.785473" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a2270&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.202756" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a1ca0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.210970" level="FAIL">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a3920&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</msg>
+<var>${response}</var>
+<arg>login</arg>
+<arg>${login_path}</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<status status="FAIL" start="2025-05-24T07:45:06.570232" elapsed="0.642483">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a3920&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.212863" elapsed="0.000025"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${token}</var>
+<arg>${response.json()['token']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.212972" elapsed="0.000019"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${auth_headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.213085" elapsed="0.000069"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>${role}</arg>
+<arg>${base_url}</arg>
+<arg>headers=${auth_headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.213263" elapsed="0.000018"/>
+</kw>
+<kw name="Delete Session By Name" owner="SessionManager">
+<arg>login</arg>
+<status status="NOT RUN" start="2025-05-24T07:45:07.213350" elapsed="0.000016"/>
+</kw>
+<arg>${ROLE}</arg>
+<status status="FAIL" start="2025-05-24T07:45:06.564949" elapsed="0.648505">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a3920&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</kw>
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:07.213731" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<var>${resp}</var>
+<arg>${ROLE}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.213706" elapsed="0.000136"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.214058" elapsed="0.000053"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-05-24T07:45:07.214682" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-05-24T07:45:07.214548" elapsed="0.000241"/>
+</kw>
+<status status="FAIL" start="2025-05-24T07:45:06.564008" elapsed="0.650888">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a3920&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</test>
+<test id="s1-t3" name="Staff Cannot Access User List" line="26">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:07.215994" level="INFO">${ROLE} = STAFF</msg>
+<var>${ROLE}</var>
+<arg>STAFF</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:07.215799" elapsed="0.000232"/>
+</kw>
+<kw name="Create Auth Session As Role" owner="ApiKeywords">
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:07.218245" level="INFO">${base_url} = https://your.api.endpoint.com</msg>
+<var>${base_url}</var>
+<arg>AUTH_API_BASE_URL</arg>
+<status status="PASS" start="2025-05-24T07:45:07.216583" elapsed="0.001691"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:07.218488" level="INFO">${login_path} = /auth/login</msg>
+<var>${login_path}</var>
+<arg>LOGIN_ENDPOINT</arg>
+<status status="PASS" start="2025-05-24T07:45:07.218375" elapsed="0.000135"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:07.219048" level="INFO">${username_key} = STAFF_USERNAME</msg>
+<var>${username_key}</var>
+<arg>${role.upper()}_USERNAME</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:07.218596" elapsed="0.000474"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-24T07:45:07.219613" level="INFO">${password_key} = STAFF_PASSWORD</msg>
+<var>${password_key}</var>
+<arg>${role.upper()}_PASSWORD</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-24T07:45:07.219245" elapsed="0.000390"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:07.219836" level="INFO">${username} = staff@example.com</msg>
+<var>${username}</var>
+<arg>${username_key}</arg>
+<status status="PASS" start="2025-05-24T07:45:07.219716" elapsed="0.000140"/>
+</kw>
+<kw name="Get Env Variable" owner="EnvLoader">
+<msg time="2025-05-24T07:45:07.220050" level="INFO">${password} = staffsecret</msg>
+<var>${password}</var>
+<arg>${password_key}</arg>
+<status status="PASS" start="2025-05-24T07:45:07.219934" elapsed="0.000135"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:07.220356" level="INFO">Creating Session using : alias=login, url=https://your.api.endpoint.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>login</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-05-24T07:45:07.220246" elapsed="0.000225"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-24T07:45:07.220771" level="INFO">${payload} = {'username': 'staff@example.com', 'password': 'staffsecret'}</msg>
+<var>${payload}</var>
+<arg>username=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-24T07:45:07.220563" elapsed="0.000229"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-24T07:45:07.221007" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-24T07:45:07.220879" elapsed="0.000149"/>
+</kw>
+<kw name="Post Request" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:07.221276" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg time="2025-05-24T07:45:07.231570" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a23f0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.438990" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913d970&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.847295" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913d3a0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.862444" level="FAIL">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913c1a0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</msg>
+<var>${response}</var>
+<arg>login</arg>
+<arg>${login_path}</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<status status="FAIL" start="2025-05-24T07:45:07.221240" elapsed="0.642698">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913c1a0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.864102" elapsed="0.000044"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${token}</var>
+<arg>${response.json()['token']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.864269" elapsed="0.000018"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${auth_headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.864367" elapsed="0.000016"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>${role}</arg>
+<arg>${base_url}</arg>
+<arg>headers=${auth_headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.864554" elapsed="0.000019"/>
+</kw>
+<kw name="Delete Session By Name" owner="SessionManager">
+<arg>login</arg>
+<status status="NOT RUN" start="2025-05-24T07:45:07.864661" elapsed="0.000017"/>
+</kw>
+<arg>${ROLE}</arg>
+<status status="FAIL" start="2025-05-24T07:45:07.216315" elapsed="0.648456">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913c1a0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</kw>
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-05-24T07:45:07.865085" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<var>${resp}</var>
+<arg>${ROLE}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.865026" elapsed="0.000232"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>403</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-05-24T07:45:07.865489" elapsed="0.000060"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-05-24T07:45:07.865983" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-05-24T07:45:07.865850" elapsed="0.000281"/>
+</kw>
+<status status="FAIL" start="2025-05-24T07:45:07.215281" elapsed="0.651023">ConnectionError: HTTPSConnectionPool(host='your.api.endpoint.com', port=443): Max retries exceeded with url: /auth/login (Caused by NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913c1a0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)"))</status>
+</test>
+<status status="FAIL" start="2025-05-24T07:45:05.537002" elapsed="2.329943"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="List Users" id="s1" pass="0" fail="3" skip="0">List Users</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-05-24T07:45:05.654837" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg time="2025-05-24T07:45:05.917954" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009244350&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.132050" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400928ba10&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.540214" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d4009289fa0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.562454" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-05-24T07:45:06.570253" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg time="2025-05-24T07:45:06.578674" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a28d0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:06.785473" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a2270&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.202756" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a1ca0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.213731" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-05-24T07:45:07.221276" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg time="2025-05-24T07:45:07.231570" level="WARN">Retrying (RetryAdapter(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d40092a23f0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.438990" level="WARN">Retrying (RetryAdapter(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913d970&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.847295" level="WARN">Retrying (RetryAdapter(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("&lt;urllib3.connection.HTTPSConnection object at 0x7d400913d3a0&gt;: Failed to resolve 'your.api.endpoint.com' ([Errno -2] Name or service not known)")': /auth/login</msg>
+<msg time="2025-05-24T07:45:07.865085" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>
